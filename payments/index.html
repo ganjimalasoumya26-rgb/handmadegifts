@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Payment | StitchWithLove Gifts</title>
+  <link rel="stylesheet" href="../styles.css" />
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #fff6fd;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #9b4d96;
+      padding: 18px 40px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header a {
+      color: white;
+      margin-left: 18px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .payment-box {
+      max-width: 650px;
+      margin: 60px auto;
+      background: white;
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.12);
+    }
+    h2 {
+      text-align: center;
+      color: #7b2e75;
+      font-weight: 600;
+    }
+    label {
+      font-weight: 500;
+      color: #4b4b4b;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    button {
+      width: 100%;
+      background: #9b4d96;
+      border: none;
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 17px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #7b2e75;
+    }
+    .back-cart {
+      display: block;
+      text-align: center;
+      margin-bottom: 16px;
+      color: #9b4d96;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #f7e5f6;
+      margin-top: 50px;
+      color: #6a2f68;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h2>StitchWithLove Gifts</h2>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/products/">Products</a>
+      <a href="/cart/">Cart</a>
+    </nav>
+  </header>
+
+  <div class="payment-box">
+    <a href="/cart/" class="back-cart">← Back to cart</a>
+    <h2>Payment Details 💳</h2>
+
+    <form id="paymentForm">
+      <label>Full Name</label>
+      <input type="text" id="name" required placeholder="Enter your name" />
+
+      <label>Email Address</label>
+      <input type="email" id="email" required placeholder="example@email.com"/>
+
+      <label>Phone Number</label>
+      <input type="tel" id="phone" required placeholder="9876543210"/>
+
+      <label>City</label>
+      <input type="text" id="city" required placeholder="Hyderabad"/>
+
+      <label>Pincode</label>
+      <input type="text" id="pincode" required placeholder="500001"/>
+
+      <label>Payment Method</label>
+      <select id="paymentMethod" required>
+        <option value="UPI">UPI (GooglePay/PhonePe/Paytm)</option>
+        <option value="Card">Credit/Debit Card</option>
+        <option value="NetBanking">Net Banking</option>
+      </select>
+
+      <button type="submit">Pay Now (Demo)</button>
+    </form>
+  </div>
+
+  <footer>
+    © 2025 StitchWithLove Gifts — Handmade with ❤️
+  </footer>
+
+  <script>
+    document.getElementById("paymentForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      // Store details if needed
+      const orderDetails = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        city: document.getElementById("city").value,
+        pincode: document.getElementById("pincode").value,
+        paymentMethod: document.getElementById("paymentMethod").value,
+        time: new Date().toISOString(),
+      };
+
+      localStorage.setItem("lastOrder", JSON.stringify(orderDetails));
+
+      // Redirect to thank-you page
+      window.location.href = "/thankyou/";
+    });
+  </script>
+</body>
+</html>
