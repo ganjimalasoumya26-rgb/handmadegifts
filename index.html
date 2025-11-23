@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>StitchWithLove Handmade Gifts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --pink: #ff7aa2;
+      --purple: #8b5cff;
+      --yellow: #ffd76f;
+      --mint: #7ae1c3;
+      --dark: #231833;
+      --light: #fff8ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #ffe6f5, #fff8ff);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* Layout */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      color: white;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .logo span {
+      font-size: 1.25rem;
+    }
+
+    nav button {
+      margin-left: 0.5rem;
+      border: none;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      backdrop-filter: blur(4px);
+      transition: transform 0.15s ease, box-shadow 0.15s ease,
+        background 0.15s ease;
+    }
+
+    nav button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 1.5rem auto 2.5rem;
+      padding: 0 1rem;
+    }
+
+    section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 1.5rem;
+      padding: 1.75rem 1.5rem 2rem;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08);
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    h1,
+    h2 {
+      margin-bottom: 0.75rem;
+    }
+
+    p.lead {
+      margin-bottom: 1.2rem;
+      color: #5b4c73;
+    }
+
+    /* Gift animation background */
+    .gift-clouds {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .gift {
+      position: absolute;
+      font-size: 2.2rem;
+      animation: floatGift 12s linear infinite;
+      opacity: 0.5;
+    }
+
+    .gift:nth-child(2) {
+      animation-duration: 15s;
+      font-size: 2.8rem;
+      left: 20%;
+    }
+    .gift:nth-child(3) {
+      animation-duration: 18s;
+      font-size: 2rem;
+      left: 70%;
+    }
+    .gift:nth-child(4) {
+      animation-duration: 20s;
+      font-size: 2.6rem;
+      left: 85%;
+    }
+
+    @keyframes floatGift {
+      0% {
+        transform: translateY(110vh) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-20vh) rotate(20deg);
+      }
+    }
+
+    /* Buttons */
+    .btn-primary,
+    .btn-secondary {
+      border: none;
+      border-radius: 999px;
+      padding: 0.65rem 1.4rem;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease,
+        background 0.15s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: white;
+      box-shadow: 0 8px 20px rgba(255, 122, 162, 0.35);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--purple);
+      border: 1px solid rgba(139, 92, 255, 0.3);
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 13px rgba(0, 0, 0, 0.18);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255, 215, 111, 0.35);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.6rem;
+    }
+
+    /* Product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.1rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #ffffff, #ffeef7);
+      border-radius: 1.3rem;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background: radial-gradient(circle at top left, #ffd76f55 0, transparent 55%),
+        radial-gradient(circle at bottom right, #7ae1c355 0, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      z-index: -1;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      margin-bottom: 0.35rem;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: #5b4c73;
+      margin-bottom: 0.65rem;
+    }
+
+    .price {
+      font-weight: 700;
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.05);
+      font-size: 0.75rem;
+      margin-right: 0.25rem;
+    }
+
+    /* Cart */
+    .cart-list {
+      margin-top: 0.8rem;
+      border-radius: 1rem;
+      background: #fff4ff;
+      padding: 0.75rem 0.9rem;
+      max-height: 260px;
+      overflow: auto;
+    }
+
+    .cart-empty {
+      font-size: 0.9rem;
+      color: #7a6d8f;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.45rem 0;
+      border-bottom: 1px dashed rgba(0, 0, 0, 0.06);
+      font-size: 0.9rem;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item span {
+      margin-right: 0.3rem;
+    }
+
+    .badge-pill {
+      background: var(--mint);
+      color: var(--dark);
+      font-size: 0.7rem;
+      border-radius: 999px;
+      padding: 0.18rem 0.55rem;
+      margin-left: 0.3rem;
+    }
+
+    .cart-summary {
+      margin-top: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .remove-btn {
+      border: none;
+      background: transparent;
+      color: #ff4b7a;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    /* Form */
+    form {
+      margin-top: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #4c405f;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border-radius: 0.6rem;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      margin-bottom: 0.7rem;
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 2px rgba(139, 92, 255, 0.2);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.6rem;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #7a6d8f;
+      margin-top: 0.25rem;
+    }
+
+    .pill-row {
+      margin-top: 0.4rem;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .big-emoji {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight {
+      background: linear-gradient(90deg, #ffeaa7, #fd79a8);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+
+      main {
+        margin-top: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- floating gift emojis -->
+  <div class="gift-clouds">
+    <div class="gift" style="left:5%;">🎁</div>
+    <div class="gift">🎀</div>
+    <div class="gift">🧵</div>
+    <div class="gift">🎁</div>
+  </div>
+
+  <header>
+    <div class="logo">
+      <span>🎁</span>
+      <span>StitchWithLove Gifts</span>
+    </div>
+    <nav>
+      <button onclick="showSection('home')">Home</button>
+      <button onclick="showSection('products')">Products</button>
+      <button onclick="showSection('cart')">Cart (<span id="navCartCount">0</span>)</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- INDEX / HOME -->
+    <section id="home" class="active">
+      <span class="tag">Handmade with love</span>
+      <h1>Bright little gifts for big feelings ✨</h1>
+      <p class="lead">
+        StitchWithLove is your tiny corner of the internet filled with
+        hand-crafted journals, crochet plushies, and personalised gift boxes —
+        made in small batches, wrapped in big love.
+      </p>
+      <button class="btn-primary" onclick="showSection('products')">
+        Shop handmade gifts ➜
+      </button>
+      <button class="btn-secondary" onclick="scrollToInfo()">
+        Why handmade?
+      </button>
+
+      <div style="margin-top:1.5rem;">
+        <h3>Made for: <span class="highlight">Birthdays • Thank-yous • Just-because</span></h3>
+        <p class="note">
+          Every order includes a handwritten mini-note and eco-friendly wrapping.
+        </p>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products">
+      <span class="tag">Our favourites</span>
+      <h2>Handmade gifts you’ll want to keep for yourself 💌</h2>
+      <p class="lead">
+        Pick a gift, add it to your cart, and move to the payment step when
+        you’re ready. This is a demo store — no real payments are processed.
+      </p>
+
+      <div class="product-grid">
+        <div class="card">
+          <h3>Cozy Crochet Heart Plush</h3>
+          <p>Soft pastel heart plush, perfect for desk cuddles and care
+            packages.</p>
+          <div class="price">₹499</div>
+          <div class="pill-row">
+            <span class="pill">Pastel pink</span>
+            <span class="pill">Hand-stitched</span>
+          </div>
+          <button class="btn-primary" onclick="addToCart('Cozy Crochet Heart Plush', 499)">
+            Add to cart
+          </button>
+        </div>
+
+        <div class="card">
+          <h3>Memory Lane Mini Scrapbook</h3>
+          <p>Tuck in photos, tickets, and tiny notes — a storybook of your
+            friendship.</p>
+          <div class="price">₹699</div>
+          <div class="pill-row">
+            <span class="pill">Includes stickers</span>
+            <span class="pill">Bright pages</span>
+          </div>
+          <button class="btn-primary" onclick="addToCart('Memory Lane Mini Scrapbook', 699)">
+            Add to cart
+          </button>
+        </div>
+
+        <div class="card">
+          <h3>Warm Mug + Coaster Set</h3>
+          <p>Hand-painted mug with a crochet coaster for those late-night
+            chai talks.</p>
+          <div class="price">₹549</div>
+          <div class="pill-row">
+            <span class="pill">Gift-ready box</span>
+            <span class="pill">Dishwasher safe</span>
+          </div>
+          <button class="btn-primary" onclick="addToCart('Warm Mug + Coaster Set', 549)">
+            Add to cart
+          </button>
+        </div>
+
+        <div class="card">
+          <h3>Custom Name Hoop Art</h3>
+          <p>Embroidery hoop with your friend’s name and tiny florals — wall
+            ready.</p>
+          <div class="price">₹899</div>
+          <div class="pill-row">
+            <span class="pill">Made to order</span>
+            <span class="pill">Wall decor</span>
+          </div>
+          <button class="btn-primary" onclick="addToCart('Custom Name Hoop Art', 899)">
+            Add to cart
+          </button>
+        </div>
+      </div>
+
+      <div style="margin-top:1.2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.7rem;">
+        <p class="note">
+          Tip: Add at least one item, then continue to your cart.
+        </p>
+        <button class="btn-secondary" onclick="showSection('cart')">
+          Go to cart ➜
+        </button>
+      </div>
+    </section>
+
+    <!-- CART -->
+    <section id="cart">
+      <span class="tag">Your cart</span>
+      <h2>Review your handmade happiness 🧺</h2>
+      <div class="cart-list" id="cartList">
+        <p class="cart-empty">Your cart is empty. Start by adding a gift from the
+          Products section.</p>
+      </div>
+
+      <div class="cart-summary">
+        <div>
+          Items: <span id="cartItemsCount">0</span><br />
+          <small class="note">GST + shipping included in demo total.</small>
+        </div>
+        <div>Total: ₹<span id="cartTotal">0</span></div>
+      </div>
+
+      <div style="margin-top:0.85rem;display:flex;flex-wrap:wrap;gap:.6rem;">
+        <button class="btn-secondary" onclick="showSection('products')">Continue shopping</button>
+        <button class="btn-primary" id="checkoutBtn" onclick="goToPayment()" disabled>
+          Proceed to payment ➜
+        </button>
+      </div>
+    </section>
+
+    <!-- PAYMENT -->
+    <section id="payment">
+      <span class="tag">Secure demo checkout</span>
+      <h2>Payment details 💳</h2>
+      <p class="lead">
+        This is a demo payment form — feel free to type sample details. No
+        actual payment is made.
+      </p>
+
+      <form id="paymentForm">
+        <label for="name">Full name</label>
+        <input id="name" required placeholder="Your name" />
+
+        <label for="email">Email for order updates</label>
+        <input id="email" type="email" required placeholder="you@example.com" />
+
+        <div class="two-col">
+          <div>
+            <label for="city">City</label>
+            <input id="city" required placeholder="Hyderabad" />
+          </div>
+          <div>
+            <label for="pincode">Pincode</label>
+            <input id="pincode" required placeholder="500001" />
+          </div>
+        </div>
+
+        <label for="paymentMethod">Payment method</label>
+        <select id="paymentMethod" required>
+          <option value="">Choose a method</option>
+          <option>UPI (GPay/PhonePe/Paytm)</option>
+          <option>Credit / Debit Card</option>
+          <option>Net banking</option>
+          <option>Cash on delivery</option>
+        </select>
+
+        <p class="note">
+          This store is for learning Google Analytics & GTM. Use test details
+          only.
+        </p>
+
+        <div style="margin-top:0.8rem;">
+          <button type="button" class="btn-secondary" onclick="showSection('cart')">
+            ← Back to cart
+          </button>
+          <button type="submit" class="btn-primary">
+            Pay now (demo)
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- THANK YOU -->
+    <section id="thankyou" class="center">
+      <div class="big-emoji">💌</div>
+      <h2>Your handmade surprise is on its way!</h2>
+      <p class="lead">
+        Thank you for supporting small, handmade dreams. We’re wrapping your
+        order with extra glitter and love.
+      </p>
+      <p class="note" id="redirectNote">
+        Taking you back to the home page in 5 seconds…
+      </p>
+      <button class="btn-secondary" onclick="goHomeNow()">
+        Go to Home now
+      </button>
+    </section>
+  </main>
+
+  <script>
+    // simple SPA controller
+    const sections = ["home", "products", "cart", "payment", "thankyou"];
+    let cart = [];
+    let thankyouTimer = null;
+
+    function showSection(id) {
+      sections.forEach((sec) => {
+        document.getElementById(sec).classList.toggle("active", sec === id);
+      });
+
+      if (id !== "thankyou" && thankyouTimer) {
+        clearTimeout(thankyouTimer);
+        thankyouTimer = null;
+      }
+    }
+
+    function scrollToInfo() {
+      showSection("products");
+    }
+
+    // CART LOGIC
+    function addToCart(name, price) {
+      const existing = cart.find((i) => i.name === name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      renderCart();
+      showSection("cart");
+    }
+
+    function removeFromCart(name) {
+      cart = cart.filter((i) => i.name !== name);
+      renderCart();
+    }
+
+    function renderCart() {
+      const list = document.getElementById("cartList");
+      const totalEl = document.getElementById("cartTotal");
+      const countEl = document.getElementById("cartItemsCount");
+      const navCount = document.getElementById("navCartCount");
+      const checkoutBtn = document.getElementById("checkoutBtn");
+
+      if (!cart.length) {
+        list.innerHTML =
+          '<p class="cart-empty">Your cart is empty. Add a handmade gift from the Products page.</p>';
+        totalEl.textContent = "0";
+        countEl.textContent = "0";
+        navCount.textContent = "0";
+        checkoutBtn.disabled = true;
+        return;
+      }
+
+      let html = "";
+      let total = 0;
+      let itemsCount = 0;
+
+      cart.forEach((item) => {
+        total += item.price * item.qty;
+        itemsCount += item.qty;
+        html += `
+          <div class="cart-item">
+            <div>
+              <span>${item.name}</span>
+              <span class="badge-pill">x ${item.qty}</span>
+            </div>
+            <div>
+              ₹${item.price * item.qty}
+              <button class="remove-btn" onclick="removeFromCart('${item.name.replace(/'/g, "\\'")}')">
+                remove
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      list.innerHTML = html;
+      totalEl.textContent = total;
+      countEl.textContent = itemsCount;
+      navCount.textContent = itemsCount;
+      checkoutBtn.disabled = false;
+    }
+
+    function goToPayment() {
+      if (!cart.length) return;
+      showSection("payment");
+    }
+
+    // PAYMENT + THANK YOU
+    document.getElementById("paymentForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // In real site you'd send data to server here.
+      // For demo, just show thank you + clear cart.
+      cart = [];
+      renderCart();
+
+      showSection("thankyou");
+
+      let seconds = 5;
+      const note = document.getElementById("redirectNote");
+      note.textContent = `Taking you back to the home page in ${seconds} seconds…`;
+
+      thankyouTimer = setInterval(() => {
+        seconds--;
+        if (seconds <= 0) {
+          clearInterval(thankyouTimer);
+          thankyouTimer = null;
+          goHomeNow();
+        } else {
+          note.textContent = `Taking you back to the home page in ${seconds} seconds…`;
+        }
+      }, 1000);
+    });
+
+    function goHomeNow() {
+      showSection("home");
+    }
+
+    // initial cart render
+    renderCart();
+  </script>
+</body>
+</html>
