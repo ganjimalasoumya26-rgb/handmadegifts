@@ -695,9 +695,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     // initial cart render
     renderCart();
+   // Show correct section when page loads using URL hash (ex: #thankyou)
+window.addEventListener("load", function () {
+  const hash = window.location.hash.replace("#", "");
+
+  if (sections.includes(hash)) {
+    showSection(hash);
+    document.getElementById(hash).scrollIntoView();
+  }
+});
   </script>
 </body>
 </html>
+
 
 
 
