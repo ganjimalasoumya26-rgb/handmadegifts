@@ -144,6 +144,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script>
     document.getElementById("paymentForm").addEventListener("submit", function(e) {
       e.preventDefault();
+      // Redirect to Thank You section
+    window.location.href ="/#thankyou";
+});
+</script>
 
       // Store details if needed
       const orderDetails = {
@@ -152,6 +156,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         phone: document.getElementById("phone").value,
         city: document.getElementById("city").value,
         pincode: document.getElementById("pincode").value,
+        
         paymentMethod: document.getElementById("paymentMethod").value,
         time: new Date().toISOString(),
       };
